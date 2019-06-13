@@ -68,41 +68,74 @@ updateLetterToGuess ();
         updateGuessessLeft();
         updateGuessesSoFar();
     }
-
-
-    // User key input to make selection in lowercase
-    
     document.onkeyup = function(event) {
-         var userGuess = String.fromCharCode (event.keyCode).toLowerCase();
-         var check = psychicGuess.includes(userGuess);
-    
-         if (check === false) {
-             alert("Not a valid selection");
-             return false;
-         } else if (check === true) {
-             
-            guessesLeft--;
-            guessedLetters.push(userGuess);
-            updateGuessessLeft();
-            updateGuessesSoFar ();
+        var userGuess = String.fromCharCode (event.keyCode).toLowerCase();
+        var check = psychicGuess.includes(userGuess);
+   
+       console.log(check);
 
-            // if(psychicGuess !=)
+        if (!check) {
+            alert("Not a valid selection");
+            return false;
+        } else {
+
+           guessesLeft--;
+           guessedLetters.push(userGuess);
+           updateGuessessLeft();
+           updateGuessesSoFar ();
+
+           // if(psychicGuess !=)
+           
+        if (guessesLeft > 0) {
+           if (userGuess === psychicChoice) {
+                wins++;
+               document.querySelector('#wins').innerHTML = "Wins: " + wins;
+               userGuess = userGuess.toUpperCase();
+               reset();
+           } 
+       } else {
+           // We will lose the game and it will display
+           losses++;
+           document.querySelector('#losses').innerHTML = "Losses: " + losses;
+           updateGuessessLeft()
+           // Then we'll call the reset. 
+           reset();
+       }
+   }
+   }
+
+    // User key input to make selection in lowercase / alternate code 
+    
+    // document.onkeyup = function(event) {
+    //      var userGuess = String.fromCharCode (event.keyCode).toLowerCase();
+    //      var check = psychicGuess.includes(userGuess);
+    
+    //      if (check === false) {
+    //          alert("Not a valid selection");
+    //          return false;
+    //      } else if (check === true) {
+    //         guessesLeft--;
+    //         guessedLetters.push(userGuess);
+    //         updateGuessessLeft();
+    //         updateGuessesSoFar ();
+
+    //         // if(psychicGuess !=)
             
-         if (guessesLeft > 0) {
-            if (userGuess === psychicChoice) {
-                 wins++;
-                document.querySelector('#wins').innerHTML = "Wins: " + wins;
-                userGuess = userGuess.toUpperCase();
-                reset();
-            }
-        } else if (guessesLeft == 0) {
-            // We will lose the game and it will display
-            losses++;
-            document.querySelector('#losses').innerHTML = "Losses: " + losses;
-            updateGuessessLeft()
-            // Then we'll call the reset. 
-            reset();
+    //      if (guessesLeft > 0) {
+    //         if (userGuess === psychicChoice) {
+    //              wins++;
+    //             document.querySelector('#wins').innerHTML = "Wins: " + wins;
+    //             userGuess = userGuess.toUpperCase();
+    //             reset();
+    //         }
+    //     } else if (guessesLeft == 0) {
+    //         // We will lose the game and it will display
+    //         losses++;
+    //         document.querySelector('#losses').innerHTML = "Losses: " + losses;
+    //         updateGuessessLeft()
+    //         // Then we'll call the reset. 
+    //         reset();
        
-        }
-    }
-    }
+    //     }
+    // }
+    // }
